@@ -3,6 +3,7 @@ package com.example.asus.demo.adapter;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -24,8 +25,13 @@ import java.util.List;
 public class ContractsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<ContractorEntity> mContractorEntities;
-    private List<ContractorEntity> mEntityList;
+
+    private ClickListener mClickListener;
     private static final String TAG = "ContractsAdapter";
+
+    public interface  ClickListener{
+        void OnClickListener(View view,MotionEvent event);
+    }
 
     public ContractsAdapter(List<ContractorEntity> contractorEntities) {
         mContractorEntities = contractorEntities;
@@ -48,15 +54,17 @@ public class ContractsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         if (mContractorEntities.get(position).getType()==Type.CONTRACT){
             ((ViewHolder)holder).profilePicture.setBackgroundResource(mContractorEntities.get(position).getProfilePicture());
             ((ViewHolder)holder).name.setText(mContractorEntities.get(position).getName());
-            ((ViewHolder)holder).itemView.setOnClickListener(new View.OnClickListener() {
+            ((ViewHolder)holder).itemView.setOnTouchListener(new View.OnTouchListener() {
                 @Override
-                public void onClick(View view) {
-                    Log.e(TAG, "onClick: "+ Pinyin.toPinyin(mContractorEntities.get(position).getName().charAt(0)));
-                    Log.e(TAG, "onClick: "+Pinyin.toPinyin(mContractorEntities.get(position).getName(),"") );
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    if (mClickListener!=null){
+                        mClickListener.OnClickListener(view,motionEvent);
+                    }
+                    return false;
                 }
             });
         }else {
@@ -75,6 +83,11 @@ public class ContractsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public int getItemViewType(int position) {
         return mContractorEntities.get(position).getType();
+    }
+
+
+    public void setClickListener(ClickListener clickListener) {
+        mClickListener = clickListener;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
