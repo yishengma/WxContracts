@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="52dp"
     android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/rl"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="51dp">
 
         <ImageView
             android:id="@+id/iv_profile_picture"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="32dp"
+            android:layout_height="33dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:background="@drawable/ic_launcher_background" />
 
         <TextView
+            android:id="@+id/tv_name"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
@@ -25,7 +27,15 @@
             android:text="名字"
             android:gravity="center_vertical"
             android:textSize="15sp" />
+
     </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="10dp"
+        android:background="@color/colorViewDivider" />
+
 
 
 </LinearLayout>
