@@ -17,6 +17,8 @@ import com.github.promeg.pinyinhelper.Pinyin;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by asus on 18-3-8.
@@ -25,6 +27,9 @@ import java.util.List;
 public class ContractsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<ContractorEntity> mContractorEntities;
+    private  float startX ;
+    private  float startY ;
+    private  Timer timer ;
 
     private ClickListener mClickListener;
     private static final String TAG = "ContractsAdapter";
@@ -58,16 +63,22 @@ public class ContractsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         if (mContractorEntities.get(position).getType()==Type.CONTRACT){
             ((ViewHolder)holder).profilePicture.setBackgroundResource(mContractorEntities.get(position).getProfilePicture());
             ((ViewHolder)holder).name.setText(mContractorEntities.get(position).getName());
+
+
+
             ((ViewHolder)holder).itemView.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent motionEvent) {
-                    if (mClickListener!=null){
-                        mClickListener.OnClickListener(view,motionEvent);
+
+                    if (mClickListener != null) {
+                        mClickListener.OnClickListener(view, motionEvent);
                     }
+
                     return false;
                 }
             });
-        }else {
+        }
+        else {
 
             ((DividerViewHolder)holder).letter.setText(mContractorEntities.get(position).getName());
 

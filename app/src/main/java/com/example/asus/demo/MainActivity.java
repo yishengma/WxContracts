@@ -11,6 +11,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.PopupWindow;
 
 import com.example.asus.demo.adapter.ContractsAdapter;
@@ -47,25 +48,28 @@ public class MainActivity extends AppCompatActivity {
         mRvContracts = (RecyclerView)findViewById(R.id.rv_contracts);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         mRvContracts.setLayoutManager(manager);
+
+
+
+        //获取PopWindow宽和高
         mPopupWindow = new PopupWindow(getLayoutInflater().inflate(R.layout.menu_window,null),300,100,true);
         mPopupWindow.setOutsideTouchable(true);
-
-
-
+        mPopupWindow.setElevation(5);
         mAdapter = new ContractsAdapter(mContractorEntities);
         mAdapter.setClickListener(new ContractsAdapter.ClickListener() {
             @Override
             public void OnClickListener(View view, MotionEvent event) {
-                Log.e(TAG, "OnClickListener: X:"+event.getX() +"Y:"+event.getY());
                 DisplayMetrics metrics = getResources().getDisplayMetrics();
                 int width = metrics.widthPixels;
-                int height = metrics.heightPixels;
-                if (event.getX()>width/2){
+                int xoff = (int) event.getX();
+                int yoff = 0 - (view.getHeight() - (int) event.getY()) - mPopupWindow.getHeight()-50;
+                if (event.getRawX()>width/2){
+                     xoff = (int) event.getX()-width/2;
                     mPopupWindow.setAnimationStyle(R.style.AnimationRight);
                 }else {
                     mPopupWindow.setAnimationStyle(R.style.AnimationLeft);
                 }
-                mPopupWindow.showAsDropDown(view,0,0);
+                mPopupWindow.showAsDropDown(view,xoff,yoff,Gravity.TOP);
 
 
             }
