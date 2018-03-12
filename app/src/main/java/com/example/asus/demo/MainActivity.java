@@ -63,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
                 int width = metrics.widthPixels;
                 int xoff = (int) event.getX();
                 int yoff = 0 - (view.getHeight() - (int) event.getY()) - mPopupWindow.getHeight()-50;
-                if (event.getRawX()>width/2){
-                     xoff = (int) event.getX()-width/2;
+                if (event.getX()>width/2){
+                     xoff = (int) event.getX()-width/2+10;
                     mPopupWindow.setAnimationStyle(R.style.AnimationRight);
                 }else {
                     mPopupWindow.setAnimationStyle(R.style.AnimationLeft);
