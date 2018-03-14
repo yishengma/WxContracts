@@ -6,4 +6,5 @@
     <color name="colorViewDivider">#eaeaea</color>
     <color name="colorDivider">#eaeaea</color>
     <color name="colorMenuBackground">#fdfdfe</color>
+    <color name="colorItemBackground">#d8d8d8</color>
 </resources>
