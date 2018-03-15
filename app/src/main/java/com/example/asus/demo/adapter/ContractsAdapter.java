@@ -35,7 +35,8 @@ public class ContractsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private static final String TAG = "ContractsAdapter";
 
     public interface  ClickListener{
-        void OnClickListener(View view,MotionEvent event);
+        void OnClickListener(View view);
+        void  OnLongClickListener(View view);
     }
 
     public ContractsAdapter(List<ContractorEntity> contractorEntities) {
@@ -63,20 +64,36 @@ public class ContractsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         if (mContractorEntities.get(position).getType()==Type.CONTRACT){
             ((ViewHolder)holder).profilePicture.setBackgroundResource(mContractorEntities.get(position).getProfilePicture());
             ((ViewHolder)holder).name.setText(mContractorEntities.get(position).getName());
-
-
-
-            ((ViewHolder)holder).itemView.setOnTouchListener(new View.OnTouchListener() {
+            ((ViewHolder)holder).itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
-                public boolean onTouch(View view, MotionEvent motionEvent) {
-
-                    if (mClickListener != null) {
-                        mClickListener.OnClickListener(view, motionEvent);
+                public boolean onLongClick(View view) {
+                    if (mClickListener!=null){
+                        mClickListener.OnLongClickListener(view);
                     }
-
                     return false;
                 }
             });
+            ((ViewHolder)holder).itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (mClickListener!=null){
+                        mClickListener.OnClickListener(view);
+                    }
+                }
+            });
+
+//
+//            ((ViewHolder)holder).itemView.setOnTouchListener(new View.OnTouchListener() {
+//                @Override
+//                public boolean onTouch(View view, MotionEvent motionEvent) {
+//
+//                    if (mClickListener != null) {
+//                        mClickListener.OnClickListener(view, motionEvent);
+//                    }
+//
+//                    return false;
+//                }
+//            });
         }
         else {
 

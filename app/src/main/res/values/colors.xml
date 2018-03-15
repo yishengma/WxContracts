@@ -7,4 +7,10 @@
     <color name="colorDivider">#eaeaea</color>
     <color name="colorMenuBackground">#fdfdfe</color>
     <color name="colorItemBackground">#d8d8d8</color>
+
+     <!-- item 的点击背景 -->
+    <drawable name="colorItemBackground">#fdfdfe</drawable>
+    <drawable name="colorItemPressed">#d8d8d8</drawable>
+
+
 </resources>

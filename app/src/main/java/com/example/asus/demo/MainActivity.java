@@ -58,22 +58,47 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new ContractsAdapter(mContractorEntities);
         mAdapter.setClickListener(new ContractsAdapter.ClickListener() {
             @Override
-            public void OnClickListener(View view, MotionEvent event) {
-                DisplayMetrics metrics = getResources().getDisplayMetrics();
-                int width = metrics.widthPixels;
-                int xoff = (int) event.getX();
-                int yoff = 0 - (view.getHeight() - (int) event.getY()) - mPopupWindow.getHeight()-50;
-                if (event.getX()>width/2){
-                     xoff = (int) event.getX()-width/2+10;
-                    mPopupWindow.setAnimationStyle(R.style.AnimationRight);
-                }else {
-                    mPopupWindow.setAnimationStyle(R.style.AnimationLeft);
-                }
-                mPopupWindow.showAsDropDown(view,xoff,yoff,Gravity.TOP);
-
+            public void OnClickListener(View view) {
 
             }
+
+            @Override
+            public void OnLongClickListener(final View view) {
+                view.setBackgroundResource(R.drawable.colorItemPressed);
+                mPopupWindow.showAsDropDown(view);
+                mPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                    @Override
+                    public void onDismiss() {
+                        view.setBackgroundResource(R.drawable.item_background_selector);
+
+                    }
+                });
+            }
         });
+
+
+
+
+
+
+//        mAdapter.setClickListener(new ContractsAdapter.ClickListener() {
+//            @Override
+//            public void OnClickListener(View view, MotionEvent event) {
+//                DisplayMetrics metrics = getResources().getDisplayMetrics();
+//                int width = metrics.widthPixels;
+//                int xoff = (int) event.getX();
+//                int yoff = 0 - (view.getHeight() - (int) event.getY()) - mPopupWindow.getHeight()-50;
+//                if (event.getX()>width/2){
+//                     xoff = (int) event.getX()-width/2+10;
+//                    mPopupWindow.setAnimationStyle(R.style.AnimationRight);
+//                }else {
+//                    mPopupWindow.setAnimationStyle(R.style.AnimationLeft);
+//                }
+//                mPopupWindow.showAsDropDown(view,xoff,yoff,Gravity.TOP);
+//
+//
+//            }
+//        });
         mRvContracts.setAdapter(mAdapter);
 
 
