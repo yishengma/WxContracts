@@ -9,8 +9,17 @@
     <color name="colorItemBackground">#d8d8d8</color>
 
      <!-- item 的点击背景 -->
-    <drawable name="colorItemBackground">#fdfdfe</drawable>
-    <drawable name="colorItemPressed">#d8d8d8</drawable>
+    <drawable name="drawableItemBackground">#fdfdfe</drawable>
+    <drawable name="drawableItemPressed">#d8d8d8</drawable>
+
+
+    <color name="colorTextWhite">#fdfdfe</color>
+    <color name="colorTextBlack">#565656</color>
+    <drawable name="drawableIndexViewBackground">#bebebe</drawable>
+    <drawable name="drawableIndexView">#00fdfdfe</drawable>
+    <color name="colorLetterViewBackground">#7f7f80</color>
+
+    <color name="colorTextGrey">#727373</color>
 
 
 </resources>

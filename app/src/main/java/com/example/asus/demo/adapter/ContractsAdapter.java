@@ -30,13 +30,16 @@ public class ContractsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private  float startX ;
     private  float startY ;
     private  Timer timer ;
+    private MotionEvent mMotionEvent;
+    private float mX;
+    private float mY;
 
     private ClickListener mClickListener;
     private static final String TAG = "ContractsAdapter";
 
     public interface  ClickListener{
-        void OnClickListener(View view);
-        void  OnLongClickListener(View view);
+        void OnClickListener(View view,float x,float y);
+        void  OnLongClickListener(View view,float x,float y);
     }
 
     public ContractsAdapter(List<ContractorEntity> contractorEntities) {
@@ -68,7 +71,7 @@ public class ContractsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 @Override
                 public boolean onLongClick(View view) {
                     if (mClickListener!=null){
-                        mClickListener.OnLongClickListener(view);
+                        mClickListener.OnLongClickListener(view,mX,mY);
                     }
                     return false;
                 }
@@ -77,8 +80,21 @@ public class ContractsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 @Override
                 public void onClick(View view) {
                     if (mClickListener!=null){
-                        mClickListener.OnClickListener(view);
+                        mClickListener.OnClickListener(view,mX,mY);
+
+
                     }
+                }
+            });
+
+            ((ViewHolder)holder).itemView.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    mX = motionEvent.getX();
+                    mY = motionEvent.getY();
+//                    Log.e(TAG, "setOnTouchListener: X"+motionEvent.getX()+"Y:" +motionEvent.getY());
+
+                    return false;
                 }
             });
 

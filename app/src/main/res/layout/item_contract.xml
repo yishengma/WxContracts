@@ -28,8 +28,9 @@
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/iv_profile_picture"
             android:text="名字"
+            android:textColor="@color/colorTextBlack"
             android:gravity="center_vertical"
-            android:textSize="15sp" />
+            android:textSize="17.5sp" />
 
     </RelativeLayout>
 

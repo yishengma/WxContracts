@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,4 +11,25 @@
 
     </android.support.v7.widget.RecyclerView>
 
-</LinearLayout>
+
+    <com.example.asus.demo.widget.IndexBar
+        android:id="@+id/v_index"
+        android:background="@drawable/drawableIndexView"
+        android:layout_alignRight="@id/rv_contracts"
+        android:layout_width="22dp"
+        android:layout_height="match_parent"
+        />
+
+    <TextView
+        android:visibility="invisible"
+        android:id="@+id/tv_letter"
+        android:layout_centerInParent="true"
+        android:background="@drawable/letterview_background_shape"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:textSize="45sp"
+        android:gravity="center"
+        android:textColor="@color/colorTextWhite"
+        />
+
+</RelativeLayout>
