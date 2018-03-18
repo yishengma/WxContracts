@@ -1,15 +1,12 @@
 package com.example.asus.demo.entity;
 
-/**
- * Created by asus on 18-3-8.
- */
 
 public class ContractorEntity {
 
     private int ContractorId;
-    private int mProfilePicture;
-    private String mName;
-    private int mType;
+    private int mProfilePicture;//联系人的头像
+    private String mName;//联系人名字
+    private int mType;//类型由于区分联系人和字母分隔
 
     public int getContractorId() {
         return ContractorId;

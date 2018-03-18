@@ -20,17 +20,12 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/**
- * Created by asus on 18-3-8.
- */
+
 
 public class ContractsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<ContractorEntity> mContractorEntities;
-    private  float startX ;
-    private  float startY ;
-    private  Timer timer ;
-    private MotionEvent mMotionEvent;
+
     private float mX;
     private float mY;
 
@@ -49,15 +44,22 @@ public class ContractsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
+        //列表的ViewHolder
         if (viewType== Type.CONTRACT){
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_contract,parent,false);
             ViewHolder viewHolder = new ViewHolder(view);
             return viewHolder;
-        }else {
+            //字母分隔的ViewHolder
+        }else if (viewType==Type.LETTER){
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_divider,parent,false);
             DividerViewHolder viewHolder = new DividerViewHolder(view);
             return viewHolder;
 
+        }else {
+            //根View 的ViewHolder
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_footer,parent,false);
+            FooterViewHolder viewHolder = new FooterViewHolder(view);
+            return  viewHolder;
         }
 
     }
@@ -90,6 +92,7 @@ public class ContractsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             ((ViewHolder)holder).itemView.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent motionEvent) {
+                    //在这里获取点击的做标
                     mX = motionEvent.getX();
                     mY = motionEvent.getY();
 //                    Log.e(TAG, "setOnTouchListener: X"+motionEvent.getX()+"Y:" +motionEvent.getY());
@@ -111,10 +114,12 @@ public class ContractsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 //                }
 //            });
         }
-        else {
+        else if (mContractorEntities.get(position).getType()==Type.LETTER){
 
             ((DividerViewHolder)holder).letter.setText(mContractorEntities.get(position).getName());
 
+        }else{
+            ((FooterViewHolder)holder).footer.setText(mContractorEntities.get(position).getName()+"位联系人");
         }
     }
 
@@ -150,6 +155,16 @@ public class ContractsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         public DividerViewHolder(View itemView) {
             super(itemView);
             letter = itemView.findViewById(R.id.tv_letter);
+        }
+    }
+
+
+    class FooterViewHolder extends RecyclerView.ViewHolder{
+        TextView footer;
+
+        public FooterViewHolder(View itemView) {
+            super(itemView);
+            footer = itemView.findViewById(R.id.tv_footer);
         }
     }
 }

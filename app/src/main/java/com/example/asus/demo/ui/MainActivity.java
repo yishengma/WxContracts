@@ -35,13 +35,14 @@ public class MainActivity extends AppCompatActivity {
     private List<ContractorEntity> mEntityList;
     private RecyclerView mRvContracts;
     private ContractsAdapter mAdapter;
-private LinearLayoutManager mManager;
+    private LinearLayoutManager mManager;
     private PopupWindow mPopupWindow;
     private TextView mLetterView;
     private IndexBar mIndexBar;
     private boolean isMove;
     private int mIndex;
     private static final String TAG = "MainActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +52,7 @@ private LinearLayoutManager mManager;
 
     }
 
-    public void initView(){
+    public void initView() {
         mLetterView = findViewById(R.id.tv_letter);
         mIndexBar = findViewById(R.id.v_index);
         mRvContracts = findViewById(R.id.rv_contracts);
@@ -60,8 +61,8 @@ private LinearLayoutManager mManager;
         mIndexBar.setLetterChangeListener(new IndexBar.OnLetterChangeListener() {
             @Override
             public void OnLetterChange(String index) {
-                for (int i=0;i<mContractorEntities.size();i++){
-                    if (index.equals(mContractorEntities.get(i).getName())){
+                for (int i = 0; i < mContractorEntities.size(); i++) {
+                    if (index.equals(mContractorEntities.get(i).getName())) {
 //                        没有滚动是因为 要滚动到的位置，已经在屏幕里面了，这时候是不滚动的，
 
 //                        只有要滚到的位置没有在屏幕上，才会滚动。
@@ -69,7 +70,7 @@ private LinearLayoutManager mManager;
 //                        mRvContracts.scrollToPosition(i);
 //                        mRvContracts.smoothScrollToPosition(i);
                         mIndex = i;
-                      moveToPosition(i);
+                        moveToPosition(i);
 
                         break;
                     }
@@ -98,10 +99,8 @@ private LinearLayoutManager mManager;
         });
 
 
-
-
         //获取PopWindow宽和高
-        mPopupWindow = new PopupWindow(getLayoutInflater().inflate(R.layout.menu_window,null),300,100,true);
+        mPopupWindow = new PopupWindow(getLayoutInflater().inflate(R.layout.menu_window, null), 300, 100, true);
         mPopupWindow.setOutsideTouchable(true);
         mPopupWindow.setElevation(5);
         mAdapter = new ContractsAdapter(mContractorEntities);
@@ -117,15 +116,15 @@ private LinearLayoutManager mManager;
                 view.setBackgroundResource(R.drawable.drawableItemPressed);
                 DisplayMetrics metrics = getResources().getDisplayMetrics();
                 int width = metrics.widthPixels;
-                int xoff = (int)x;
-                int yoff = 0 - (view.getHeight() - (int)y) - mPopupWindow.getHeight()-50;
-                if (x>width/2){
-                    xoff = (int) x-width/2+10;
+                int xoff = (int) x;
+                int yoff = 0 - (view.getHeight() - (int) y) - mPopupWindow.getHeight() - 50;
+                if (x > width / 2) {
+                    xoff = (int) x - width / 2 + 10;
                     mPopupWindow.setAnimationStyle(R.style.AnimationRight);
-                }else {
+                } else {
                     mPopupWindow.setAnimationStyle(R.style.AnimationLeft);
                 }
-                mPopupWindow.showAsDropDown(view,xoff,yoff,Gravity.TOP);
+                mPopupWindow.showAsDropDown(view, xoff, yoff, Gravity.TOP);
                 mPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
                     @Override
                     public void onDismiss() {
@@ -135,12 +134,6 @@ private LinearLayoutManager mManager;
                 });
             }
         });
-
-
-
-
-
-
 
 
 //        mAdapter.setClickListener(new ContractsAdapter.ClickListener() {
@@ -166,11 +159,11 @@ private LinearLayoutManager mManager;
 
     }
 
-    public void initData(){
+    public void initData() {
 
         mEntityList = new ArrayList<>();
         mContractorEntities = new ArrayList<>();
-        for (int i=0;i<sNAME.length;i++){
+        for (int i = 0; i < sNAME.length; i++) {
             ContractorEntity entity = new ContractorEntity();
             entity.setContractorId(i);
             entity.setType(Type.CONTRACT);
@@ -179,11 +172,15 @@ private LinearLayoutManager mManager;
             mEntityList.add(entity);
         }
 
-        SortListUtil.addDividerLetter(mContractorEntities,mEntityList);
+        SortListUtil.addDividerLetter(mContractorEntities, mEntityList);
         mContractorEntities.addAll(mEntityList);
         SortListUtil.sortList(mContractorEntities);
 
 
+        ContractorEntity entity = new ContractorEntity();
+        entity.setType(Type.FOOTER);
+        entity.setName(mContractorEntities.size() + "");
+        mContractorEntities.add(entity);
 
 
     }
@@ -194,14 +191,14 @@ private LinearLayoutManager mManager;
         int firstItem = mManager.findFirstVisibleItemPosition();
         int lastItem = mManager.findLastVisibleItemPosition();
         //然后区分情况
-        if (n <= firstItem ){
+        if (n <= firstItem) {
             //当要置顶的项在当前显示的第一个项的前面时
             mRvContracts.scrollToPosition(n);
-        }else if ( n <= lastItem ){
+        } else if (n <= lastItem) {
             //当要置顶的项已经在屏幕上显示时
-            int top = mRvContracts.getChildAt(n-firstItem).getTop();
+            int top = mRvContracts.getChildAt(n - firstItem).getTop();
             mRvContracts.scrollBy(0, top);
-        }else{
+        } else {
             //当要置顶的项在当前显示的最后一项的后面时
             mRvContracts.scrollToPosition(n);
             //这里这个变量是用在RecyclerView滚动监听里面的
@@ -209,7 +206,6 @@ private LinearLayoutManager mManager;
         }
 
     }
-
 
 
 }

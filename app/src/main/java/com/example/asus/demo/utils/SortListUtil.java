@@ -14,12 +14,13 @@ import java.util.List;
 
 import static com.example.asus.demo.configs.Letter.LETTERCHAR;
 
-/**
- * Created by asus on 18-3-10.
- */
 
 public class SortListUtil {
-
+    /**
+     * 对List进行排序
+     * @param list
+     * @return
+     */
     public static List<ContractorEntity> sortList(List<ContractorEntity> list){
         List<ContractorEntity> entityList = new ArrayList<>();
         entityList.addAll(list);
@@ -37,6 +38,14 @@ public class SortListUtil {
 
         return entityList;
     }
+
+
+    /**
+     * 定义排序的算法
+     * @param entity
+     * @param nextEntity
+     * @return
+     */
 
     public static int Comparate(ContractorEntity entity,ContractorEntity nextEntity){
         int result = 0;
@@ -83,7 +92,12 @@ public class SortListUtil {
     }
 
 
-
+    /**
+     * 向联系人List中添加字母
+     * @param contractorEntities
+     * @param entityList
+     * @return
+     */
     public static List<ContractorEntity> addDividerLetter(List<ContractorEntity> contractorEntities,List<ContractorEntity> entityList){
 
         boolean isAddChar = false;
@@ -96,7 +110,7 @@ public class SortListUtil {
                     entity.setType(Type.LETTER);
                     contractorEntities.add(entity);
                     break;
-                }else if (name<='Z'&&name>='A'&&!isAddChar){
+                }else if (name>'Z'||name<'A'&&!isAddChar){
                     ContractorEntity entity =new ContractorEntity();
                     entity.setName("#");
                     entity.setType(Type.LETTER);

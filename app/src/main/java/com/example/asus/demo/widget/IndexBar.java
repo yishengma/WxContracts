@@ -18,9 +18,7 @@ import android.widget.TextView;
 import com.example.asus.demo.R;
 import com.example.asus.demo.configs.Type;
 
-/**
- * Created by asus on 18-3-16.
- */
+
 
 public class IndexBar extends View {
     private static final String[] LETTERS = new String[]{
@@ -30,17 +28,17 @@ public class IndexBar extends View {
             "S", "T", "U", "V", "W", "X",
             "Y", "Z","#"};
     private Paint mPaint;
-    private int mHeight;
-    private int mWidth;
+    private int mHeight;//索引的高度
+    private int mWidth;//索引条的宽度
 
-    private float mLetterHeight ;
-    private float mLetterWidth;
+    private float mLetterHeight ;//绘制的字母的高度
+    private float mLetterWidth;//绘制的字母的宽度
 
 
-    private int mIndex;
-    private  int mOldIndex;
+    private int mIndex;//点击的字母的下标
+    private  int mOldIndex;//上一次点击的字母的下标
 
-    private TextView mLetterView;
+    private TextView mLetterView;//用于绑定中间随索引显示的TextView
 
 
     private OnLetterChangeListener mLetterChangeListener;
